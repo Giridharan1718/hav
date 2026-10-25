@@ -1,6 +1,6 @@
 # Retrieval and source evaluation
 
-Measured at: 2026-10-23T04:20:40.258360+00:00
+Measured at: 2026-10-25T06:20:41.823852+00:00
 Dataset: `backend/evaluation/dataset.json` (version 2026-10-22)
 Sample size: 26 queries — en: 14, hi: 7, ta: 5
 
@@ -28,7 +28,7 @@ development Hindi/Tamil translations). These numbers describe this dataset only.
 | ta | 5 | 1.00 | 0.90 | 0.80 | 100% | 80% |
 | overall | 26 | 1.00 | 0.71 | 0.81 | 100% | 58% |
 
-Median search latency: 5.8 ms (single process, local database).
+Median search latency: 6.2 ms (single process, local database).
 Negative controls: 5/5 returned no records.
 
 ## Per-query results
