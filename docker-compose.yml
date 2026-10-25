@@ -17,8 +17,8 @@ services:
       POSTGRES_PASSWORD: hva
       POSTGRES_DB: hva
     ports:
-      # Host port 55432 keeps a locally installed PostgreSQL on 5432 untouched.
-      - "127.0.0.1:55432:5432"
+      # Host port 55433 keeps a locally installed PostgreSQL on 55432 untouched.
+      - "127.0.0.1:55433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:
