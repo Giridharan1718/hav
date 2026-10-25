@@ -1,0 +1,89 @@
+# Local development stack: PostgreSQL, migrations + seed, API, background worker, web.
+#
+#   cp backend/.env.example backend/.env   # fill HVA_SECRET_KEY and HVA_ENCRYPTION_KEY
+#   cp frontend/.env.example frontend/.env.local
+#   docker compose up --build
+#
+# The stack is for local development only. It uses development secrets and the mock
+# SMS adapter; production requires managed secrets, TLS and an external provider
+# (see docs/deployment.md and docs/production-readiness.md).
+name: hva
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: hva
+      POSTGRES_PASSWORD: hva
+      POSTGRES_DB: hva
+    ports:
+      # Host port 55432 keeps a locally installed PostgreSQL on 5432 untouched.
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hva -d hva"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  migrate:
+    build: ./backend
+    command:
+      - sh
+      - -c
+      - |
+        alembic upgrade head &&
+        python -m seed.seed --skip-link-check
+    env_file:
+      - ./backend/.env
+    environment:
+      HVA_DATABASE_URL: postgresql+psycopg://hva:hva@db:5432/hva
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build: ./backend
+    env_file:
+      - ./backend/.env
+    environment:
+      HVA_DATABASE_URL: postgresql+psycopg://hva:hva@db:5432/hva
+      HVA_API_BASE_URL: http://localhost:8000
+      HVA_APP_BASE_URL: http://localhost:3000
+      HVA_CORS_ORIGINS: http://localhost:3000
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  worker:
+    build: ./backend
+    command: ["python", "-m", "app.jobs.worker"]
+    env_file:
+      - ./backend/.env
+    environment:
+      HVA_DATABASE_URL: postgresql+psycopg://hva:hva@db:5432/hva
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        HVA_API_ORIGIN: http://api:8000
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  pgdata:

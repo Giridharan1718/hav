@@ -1,0 +1,13 @@
+
+> hva-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 C:/Users/girid/Downloads/HVA/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  10:54:54
+   Duration  246ms (transform 66%, import 26%, tests 4%, worker 4%)
+

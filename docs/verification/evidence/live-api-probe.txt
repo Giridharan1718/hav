@@ -1,0 +1,20 @@
+PASS csrf rejection is 403 {"status": 403, "error": {"code": "csrf_failed", "message": "Missing or invalid CSRF token. Reload the page and try again.", "details": null, "request_id": "2568b779a4a0412f9e342d1582ba3e9f"}}
+PASS csrf rejection has request id and security headers {"content-length": "169", "content-type": "application/json", "cross-origin-resource-policy": "same-site", "date": "Fri, 23 Oct 2026 04:03:23 GMT", "permissions-policy": "geolocation=(), microphone=(self), camera=()", "referrer-policy": "strict-origin-when-cross-origin", "server": "uvicorn", "vary": "Origin", "x-content-type-options": "nosniff", "x-frame-options": "DENY", "x-request-id": "2568b779a4a0412f9e342d1582ba3e9f"}
+PASS registration succeeds {"status": "registered", "mfa_required": false, "mfa_token": null, "user": {"id": "ab13e8a6-170f-4f51-807b-d1f96130377c", "email": "probe-citizen-879c679068@example.com", "role": "citizen", "mfa_enabled": false, "created_at": "2026-10-23T09:33:24.115268+05:30"}}
+PASS assistant without consent ignores saved Hindi preference {"status": 200, "language": "en", "provider": "grounded_template"}
+PASS AI consent can be granted {"purpose": "ai_assistant", "granted": true, "document_version": "2026-10-01"}
+PASS assistant with consent uses saved Hindi preference {"status": 200, "language": "hi", "provider": "grounded_template"}
+PASS assistant remains on deterministic provider when LLM is disabled {"provider": "grounded_template", "fallback_used": false}
+PASS citizen search succeeds {"total": 1}
+PASS search history recorded after consented search {"rows": 1}
+PASS data export includes search history {"status": 200, "search_history": [{"query": "scholarship education student", "language": "hi", "filters": {"state": null, "category": null, "beneficiary": null}, "result_count": 1, "created_at": "2026-10-23T09:33:24.256483+05:30"}]}
+PASS account deletion request succeeds {"status": "scheduled", "requested_at": "2026-10-23T09:33:24.381413+05:30", "execute_after": "2026-11-22", "message": "Your profile, address, drafts, consents, search history and sessions have been removed and all sessions were signed out. Remaining records are scheduled for permanent deletion after the 30-day retention window. You can contact support to cancel before then."}
+PASS deletion immediately removes linked search history {"remaining_search_rows": 0, "user": "2026-10-23 09:33:24.470488+05:30"}
+PASS admin login succeeds "ok"
+PASS admin MFA setup starts "Add this secret to an authenticator app, then confirm with a 6-digit code."
+PASS admin MFA enrollment confirmed {"status": "enabled"}
+PASS admin overview exposes numeric published_schemes {"status": 200, "published_schemes": 8, "type": "int"}
+PASS admin overview count matches catalogue count {"overview": 8, "catalogue": 8}
+
+SUMMARY 17/17 checks passed at 2026-10-23T04:03:24.976941+00:00
+WROTE C:/Users/girid/AppData/Local/Temp/opencode/live-probe-results.json

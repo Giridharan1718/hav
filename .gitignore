@@ -1,0 +1,35 @@
+# local portable PostgreSQL used for development only
+.devdb/
+*.log
+
+# local tool metadata
+.freebuff/
+
+# python
+backend/.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# node / next
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/coverage/
+*.tsbuildinfo
+
+# secrets & environment
+.env
+.env.*
+!.env.example
+
+# development mail/OTP outbox (contains reset tokens and OTPs)
+backend/.dev-outbox/
+
+# runtime artefacts
+storage/
+exports/

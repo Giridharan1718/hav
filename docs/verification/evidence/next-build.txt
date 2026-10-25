@@ -1,0 +1,47 @@
+
+> hva-frontend@0.1.0 build
+> next build
+
+   Γû▓ Next.js 15.5.28
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully in 13.1s
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ Γ£ô Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+Γöî ╞Æ /                                     2.6 kB         109 kB
+Γö£ ╞Æ /_not-found                            127 B         103 kB
+Γö£ ╞Æ /admin                               4.79 kB         111 kB
+Γö£ ╞Æ /assistant                           7.75 kB         114 kB
+Γö£ ╞Æ /dashboard                           3.83 kB         110 kB
+Γö£ ╞Æ /drafts                               3.1 kB         109 kB
+Γö£ ╞Æ /drafts/[id]                         4.93 kB         111 kB
+Γö£ ╞Æ /login                               3.26 kB         109 kB
+Γö£ ╞Æ /offline                               167 B         106 kB
+Γö£ ╞Æ /privacy                               167 B         106 kB
+Γö£ ╞Æ /profile                             5.71 kB         112 kB
+Γö£ ╞Æ /register                            4.33 kB         111 kB
+Γö£ ╞Æ /reset-password                      2.85 kB         109 kB
+Γö£ ╞Æ /schemes                             7.36 kB         114 kB
+Γö£ ╞Æ /schemes/[slug]                      7.48 kB         114 kB
+Γö£ ╞Æ /schemes/[slug]/documents            6.08 kB         112 kB
+Γö£ ╞Æ /schemes/[slug]/eligibility          4.67 kB         111 kB
+Γö£ ╞Æ /settings/privacy                    4.29 kB         110 kB
+Γöö ╞Æ /settings/security                   3.96 kB         110 kB
++ First Load JS shared by all             103 kB
+  Γö£ chunks/493-07510acc0d2af281.js       46.6 kB
+  Γö£ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  Γöö other shared chunks (total)          1.99 kB
+
+
+╞Æ  (Dynamic)  server-rendered on demand
+

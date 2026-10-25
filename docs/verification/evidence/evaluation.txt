@@ -1,0 +1,39 @@
+evaluated 26 queries
+{
+  "n": 26,
+  "recall@5": 1.0,
+  "precision@5": 0.7083333333333334,
+  "mrr@5": 0.8076923076923077,
+  "attribution": 1.0,
+  "links_verified": 0.5769230769230769,
+  "p50_latency_ms": 5.787850000160688,
+  "negative_controls": 5,
+  "negative_control_passes": 5
+}
+{
+  "en": {
+    "n": 14,
+    "recall@5": 1.0,
+    "precision@5": 0.5833333333333333,
+    "mrr@5": 0.8571428571428571,
+    "attribution": 1.0,
+    "links_verified": 0.42857142857142855
+  },
+  "hi": {
+    "n": 7,
+    "recall@5": 1.0,
+    "precision@5": 0.8214285714285714,
+    "mrr@5": 0.7142857142857143,
+    "attribution": 1.0,
+    "links_verified": 0.7142857142857143
+  },
+  "ta": {
+    "n": 5,
+    "recall@5": 1.0,
+    "precision@5": 0.9,
+    "mrr@5": 0.8,
+    "attribution": 1.0,
+    "links_verified": 0.8
+  }
+}
+report written to C:\Users\girid\Downloads\HVA\docs\evaluation\results.md

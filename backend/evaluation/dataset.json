@@ -1,0 +1,32 @@
+{
+  "version": "2026-10-22",
+  "notes": "Representative citizen phrasings over the development catalogue. Expected slugs are the records a reviewer would consider relevant; empty expected lists are negative controls (nothing relevant exists in the catalogue).",
+  "cases": [
+    {"id": "en-01", "language": "en", "query": "farmer income support", "expected": ["pm-kisan"]},
+    {"id": "en-02", "language": "en", "query": "kisan samman nidhi instalment", "expected": ["pm-kisan"]},
+    {"id": "en-03", "language": "en", "query": "health insurance hospital cashless", "expected": ["ayushman-bharat-pmjay"]},
+    {"id": "en-04", "language": "en", "query": "5 lakh free treatment", "expected": ["ayushman-bharat-pmjay"]},
+    {"id": "en-05", "language": "en", "query": "scholarship scheduled caste", "expected": ["post-matric-scholarship-sc"]},
+    {"id": "en-06", "language": "en", "query": "student scholarship family income", "expected": ["post-matric-scholarship-sc"]},
+    {"id": "en-07", "language": "en", "query": "rural housing assistance", "expected": ["pmay-gramin"]},
+    {"id": "en-08", "language": "en", "query": "pucca house scheme", "expected": ["pmay-gramin"]},
+    {"id": "en-09", "language": "en", "query": "old age pension 60 years", "expected": ["nsap-old-age-pension"]},
+    {"id": "en-10", "language": "en", "query": "unorganised worker pension", "expected": ["atal-pension-yojana"]},
+    {"id": "en-11", "language": "en", "query": "100 days wage employment", "expected": ["mgnrega-job-card"]},
+    {"id": "en-12", "language": "en", "query": "girl child savings account", "expected": ["sukanya-samriddhi-yojana"]},
+    {"id": "en-13", "language": "en", "query": "quantum astrophysics telescope grant", "expected": []},
+    {"id": "en-14", "language": "en", "query": "commercial drone licence", "expected": []},
+    {"id": "hi-01", "language": "hi", "query": "किसान आय सहायता", "expected": ["pm-kisan"]},
+    {"id": "hi-02", "language": "hi", "query": "छात्रवृत्ति अनुसूचित जाति", "expected": ["post-matric-scholarship-sc"]},
+    {"id": "hi-03", "language": "hi", "query": "पेंशन 60 वर्ष", "expected": ["nsap-old-age-pension"]},
+    {"id": "hi-04", "language": "hi", "query": "ग्रामीण रोजगार 100 दिन", "expected": ["mgnrega-job-card"]},
+    {"id": "hi-05", "language": "hi", "query": "मजदूरी कार्ड", "expected": ["mgnrega-job-card"]},
+    {"id": "hi-06", "language": "hi", "query": "बालिका बचत योजना", "expected": []},
+    {"id": "hi-07", "language": "hi", "query": "खगोल भौतिकी अनुदान", "expected": []},
+    {"id": "ta-01", "language": "ta", "query": "விவசாயி வருமான உதவி", "expected": ["pm-kisan"]},
+    {"id": "ta-02", "language": "ta", "query": "கல்வி உதவித்தொகை", "expected": ["post-matric-scholarship-sc"]},
+    {"id": "ta-03", "language": "ta", "query": "ஓய்வூதியம் 60 வயது", "expected": ["nsap-old-age-pension"]},
+    {"id": "ta-04", "language": "ta", "query": "வேலை உறுதி 100 நாட்கள்", "expected": ["mgnrega-job-card"]},
+    {"id": "ta-05", "language": "ta", "query": "பெண் குழந்தை சேமிப்பு", "expected": []}
+  ]
+}

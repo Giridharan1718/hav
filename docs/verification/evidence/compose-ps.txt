@@ -1,0 +1,4 @@
+NAME              STATUS                        PORTS
+hva-probe-api-1   Up About a minute (healthy)   127.0.0.1:8100->8000/tcp
+hva-probe-db-1    Up About a minute (healthy)   127.0.0.1:65432->5432/tcp
+hva-probe-web-1   Up About a minute             127.0.0.1:3100->3000/tcp

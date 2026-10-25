@@ -1,0 +1,24 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\Users\girid\Downloads\HVA\backend
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.15.1, platformdirs-4.13.5, cov-6.3.0
+collected 110 items
+
+tests\test_auth_flows.py ...................                             [ 17%]
+tests\test_catalogue_flow.py ......................                      [ 37%]
+tests\test_security_admin.py ...........................                 [ 61%]
+tests\test_units.py ..........................................           [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  C:\Users\girid\Downloads\HVA\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+tests/test_auth_flows.py::test_registration_creates_citizen_and_session
+  C:\Users\girid\Downloads\HVA\backend\.venv\Lib\site-packages\alembic\config.py:604: DeprecationWarning: No path_separator found in configuration; falling back to legacy splitting on spaces, commas, and colons for prepend_sys_path.  Consider adding path_separator=os to Alembic config.
+    util.warn_deprecated(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+====================== 110 passed, 2 warnings in 32.68s =======================
