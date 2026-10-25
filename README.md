@@ -30,8 +30,7 @@ data export / account deletion request → content reviewer verification.
 
 ## Quick start (Docker)
 
-Requires Docker Compose. This configuration was written but **not exercised on the
-build machine**, which had no Docker engine (see [docs/testing.md](docs/testing.md)).
+Requires Docker Compose.
 
 ```bash
 cp backend/.env.example backend/.env
@@ -41,6 +40,11 @@ docker compose up --build
 ```
 
 Web: <http://localhost:3000> · API docs: <http://localhost:8000/api/docs>
+
+To execute the test suite inside the container once running:
+```bash
+docker compose exec api pytest
+```
 
 ## Quick start (without Docker)
 
@@ -87,12 +91,12 @@ npm test
 npm run build
 ```
 
-Current measured results are reported in [docs/testing.md](docs/testing.md) and
-[docs/evaluation/results.md](docs/evaluation/results.md). They are not repeated here so
-the README cannot drift from the measured numbers.
+Current measured results and requirement verification statuses are recorded in the authoritative [docs/verification-report.md](docs/verification-report.md) (110 pytest tests pass, Ruff clean, 17/17 Next.js pages build, 12/12 Vitest pass), as well as [docs/testing.md](docs/testing.md) and [docs/evaluation/results.md](docs/evaluation/results.md).
 
 ## Documentation
 
+- [Authoritative verification report](docs/verification-report.md)
+- [Historical verification records & evidence](docs/verification/README.md)
 - [Implementation plan](docs/plan.md)
 - [Architecture and data flow](docs/architecture.md)
 - [Data model](docs/data-model.md)
@@ -103,12 +107,16 @@ the README cannot drift from the measured numbers.
 - [Deployment guide](docs/deployment.md)
 - [Operations runbook](docs/operations.md)
 - [Testing and evaluation](docs/testing.md)
+- [Evaluation results](docs/evaluation/results.md)
+- [Scheme link audit](docs/evaluation/links.md)
 - [Known limitations](docs/limitations.md)
 - [Production-readiness checklist](docs/production-readiness.md)
 
 ## Status
 
 MVP vertical slice, suitable for a restricted demonstration after the release checks in
-[docs/production-readiness.md](docs/production-readiness.md) are completed. No public
-deployment, government partnership, legal compliance certification or provider
-agreement is claimed by this repository.
+[docs/production-readiness.md](docs/production-readiness.md) are completed.
+
+- **Automated Verification**: 110/110 pytest tests pass on host (real PostgreSQL), Ruff lint clean, TypeScript clean, Vitest 12/12 pass, production Next.js build passes.
+- **Authoritative Report**: Detailed verification logs and known environment constraints (Docker daemon dependency, Next.js 15 / OpenNext adapter support, password+TOTP auth path, Hindi/Tamil catalogue draft reviews) are fully documented in [docs/verification-report.md](docs/verification-report.md).
+- **Disclaimer**: No public deployment, government partnership, legal compliance certification or provider agreement is claimed by this repository.
