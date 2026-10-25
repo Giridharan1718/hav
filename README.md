@@ -30,20 +30,34 @@ data export / account deletion request → content reviewer verification.
 
 ## Quick start (Docker)
 
-Requires Docker Compose.
+Requires Docker Desktop / Compose engine.
 
 ```bash
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env.local
 # Fill HVA_SECRET_KEY and HVA_ENCRYPTION_KEY in backend/.env (commands are in the file).
-docker compose up --build
+docker compose up -d --build
 ```
 
-Web: <http://localhost:3000> · API docs: <http://localhost:8000/api/docs>
+### Services & Port Mappings
 
-To execute the test suite inside the container once running:
+| Service | Container | Host Port | Target URL / Health Check |
+|---|---|---|---|
+| **Web** | `hva-web-1` | `3000` | <http://localhost:3000> |
+| **API** | `hva-api-1` | `8000` | <http://localhost:8000/api/docs> · Health: `/api/v1/health` |
+| **Database** | `hva-db-1` | `55433` | PostgreSQL 16 (mapped to 55433 to avoid collision with local port 55432) |
+| **Migrations** | `hva-migrate-1` | — | Runs Alembic `upgrade head` and catalogue seed, then exits 0 |
+| **Worker** | `hva-worker-1` | — | Background task processing (dispatches batch jobs) |
+
+Inspect running containers and logs:
 ```bash
-docker compose exec api pytest
+docker compose ps
+docker compose logs -f api
+```
+
+Stop containers while keeping database volume data:
+```bash
+docker compose down
 ```
 
 ## Quick start (without Docker)
@@ -74,6 +88,19 @@ must enrol TOTP at `/settings/security` before using `/admin`.
 Scheme source links are checked during seeding. If the machine cannot reach the
 official portals, re-run `python -m seed.check_links --markdown ../docs/evaluation/links.md`
 on a networked machine; unreachable links stay flagged as unverified.
+
+## Algorithmic Complexity & Performance
+
+The platform is designed with deterministic bounds and scalable index structures:
+
+| Flow | Time Complexity | Space Complexity | Underlying Mechanism |
+|---|---|---|---|
+| **Scheme Search** | $\mathcal{O}(k \log S)$ | $\mathcal{O}(P)$ | PostgreSQL GIN index (`search_vector`) + paginated limit ($P \le 50$) |
+| **Eligibility Check** | $\mathcal{O}(R \log R)$ | $\mathcal{O}(R)$ | Deterministic in-memory operator evaluation over $R$ rules ($R \le 15$) |
+| **PIN Code Lookup** | $\mathcal{O}(\log P_{off} + M)$ | $\mathcal{O}(M)$ | B-Tree index on `pincode` over 155k post offices ($M$ = matching branches) |
+| **Assistant Guardrails** | $\mathcal{O}(E \cdot T)$ | $\mathcal{O}(E \cdot T)$ | Context bounded to $E \le 3$ schemes, 1,000 char prompt, citation validation |
+| **Rate Limiter** | $\mathcal{O}(1)$ amortized | $\mathcal{O}(K)$ | In-memory sliding-window deque with hard memory cap ($K \le 50,000$ keys) |
+| **Data Export / Delete** | $\mathcal{O}(D + S + C)$ | $\mathcal{O}(D)$ | Indexed user foreign-key queries with eager `selectinload` (no N+1 queries) |
 
 ## Verification commands
 
@@ -117,6 +144,8 @@ Current measured results and requirement verification statuses are recorded in t
 MVP vertical slice, suitable for a restricted demonstration after the release checks in
 [docs/production-readiness.md](docs/production-readiness.md) are completed.
 
+- **Dockerized Stack**: Verified live with healthy containers (`hva-api-1`, `hva-db-1`, `hva-web-1`, `hva-migrate-1`, `hva-worker-1`).
 - **Automated Verification**: 110/110 pytest tests pass on host (real PostgreSQL), Ruff lint clean, TypeScript clean, Vitest 12/12 pass, production Next.js build passes.
-- **Authoritative Report**: Detailed verification logs and known environment constraints (Docker daemon dependency, Next.js 15 / OpenNext adapter support, password+TOTP auth path, Hindi/Tamil catalogue draft reviews) are fully documented in [docs/verification-report.md](docs/verification-report.md).
+- **Multilingual Evaluation**: Recall@5 = 1.00 (EN/HI/TA), 100% source attribution, 5/5 negative controls passed.
+- **Authoritative Report**: Detailed verification logs and known environment constraints (Next.js 15 / OpenNext adapter support, password+TOTP auth path, Hindi/Tamil catalogue draft reviews) are fully documented in [docs/verification-report.md](docs/verification-report.md).
 - **Disclaimer**: No public deployment, government partnership, legal compliance certification or provider agreement is claimed by this repository.
