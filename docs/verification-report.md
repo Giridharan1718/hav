@@ -15,7 +15,7 @@
 | Local API | `http://127.0.0.1:8010` |
 | Local web | `http://localhost:3000` |
 | Docker | Docker 29.9.2, Compose v5.6.1; stack built and run with a temporary host-port override |
-| Repository | Git repository initialised by the environment; verification was performed on the working tree, then a single snapshot commit was prepared for delivery |
+| Repository | Git repository initialised by the environment; verification was performed on the working tree, then the verified snapshot was committed for delivery |
 
 Older phase reports under `docs/verification/` are retained as historical records. Some
 contain pre-fix counts, stale port numbers or superseded claims (for example, the
@@ -230,6 +230,8 @@ No tests were skipped or xfailed, and no assertions were weakened. The final cle
 - No secret scan, CI execution, penetration test, load/soak test, automated accessibility audit, backup/restore drill, TLS/HSTS deployment test or monitoring validation has been performed.
 - No legal/DPDP review or published grievance channel exists.
 - The Docker stack was tested with development secrets and mock adapters, not production configuration.
+- The Cloudflare Sites/OpenNext deployment path is blocked for Next.js 15.5.28: the documented adapter supports Next.js 13.x/14.x only. The local Next.js build and Docker web image pass; no platform deployment was executed (`docs/verification/compatibility-report.md`).
+- The production API image intentionally does not install pytest. The 110-test suite is run on the host; adding test-only tooling to the runtime image was rejected.
 
 ## 7. What has been tested
 
@@ -249,6 +251,8 @@ No tests were skipped or xfailed, and no assertions were weakened. The final cle
 - External penetration test, load/soak test, automated accessibility audit, backup/restore, TLS/HSTS, monitoring, production secrets management and least-privilege database role.
 - Professional Hindi/Tamil translation review.
 - Legal/DPDP review and grievance/support operations.
+- OpenNext/Cloudflare Sites deployment and production hosting.
+- Running the pytest suite inside the production API container (the verified path is the host run).
 
 ## 9. Known security and privacy risks
 

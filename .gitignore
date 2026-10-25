@@ -4,6 +4,8 @@
 
 # local tool metadata
 .freebuff/
+.claude-flow/
+.vscode/
 
 # python
 backend/.venv/
